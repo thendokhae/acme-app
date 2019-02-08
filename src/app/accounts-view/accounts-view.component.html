@@ -1,3 +1,63 @@
-<p>
-  accounts-view works!
-</p>
+<nav class="navbar grad-bg">
+  <span class="navbar-brand mb-0 h1 nav-title-color">Acme Bank</span>
+</nav>
+<div class="row background no-margin">
+    <div class="container padding-top-one">
+        <div class="card">
+          <div class="card-title card-title-color">
+             <h3 class="padding-left-one">Account List</h3>
+          </div>
+          <div class="card-body">
+              <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col">Account Number</th>
+                    <th scope="col">Account Type</th>
+                    <th scope="col">Balance</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let account of accounts$">
+                    <td><ngb-highlight [result]="account.accountNumber"></ngb-highlight></td>
+                    <td><ngb-highlight [result]="account.accountType"></ngb-highlight></td>
+                    <td><ngb-highlight [result]="account.balance | currency:'ZAR '"></ngb-highlight></td>
+                    <td>
+                        <button [class]="canWithdraw(account)? 'btn btn-success':'btn btn-light'" [disabled]="!canWithdraw(account)" (click)="doWithdrawal(account, content)">Withdraw</button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+          </div>
+          <div class="row">
+              <div class="col-sm">
+                <h3 class="padding-left-one">Balance</h3>
+              </div>
+              <div class="col-sm">
+                <h3>{{getAccountsTotal() | currency:'ZAR ':'symbol':'4.2-2'}}</h3>
+              </div>
+            </div>
+        </div>
+      </div>
+</div>
+
+
+<!--Withdrawal Modal-->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Withdrawal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number" class="form-control" [(ngModel)]="withdrawalAmount" id="amount" placeholder="Enter withdrawal amount">
+        </div>
+        <span class="card-title-color" *ngIf="!validWithdrawal(selectedAccount)">The maximum amount you can withdraw is: {{getMaximumWithdrawalAmount() | currency:'ZAR '}}</span>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="confirmWithdrawal()" [disabled]="!validWithdrawal(selectedAccount)">Confirm</button>
+    </div>
+  </ng-template>

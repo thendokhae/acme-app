@@ -1,0 +1,41 @@
+.background{
+    background-color: #f5f5f5;
+}
+
+.card-title-color {
+color: #BE0028;
+}
+
+.grad-bg {
+    background-image: linear-gradient(-90deg, #2E3135, #BE0028);
+}
+
+.dark-modal .modal-content {
+    background-color: #292b2c;
+    color: white;
+}
+
+.dark-modal .close {
+    color: white;
+}
+
+.light-blue-backdrop {
+    background-color: #5cb3fd;
+}
+
+.no-margin{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.padding-top-one{
+    padding-top: 15px;
+}
+
+.nav-title-color{
+    color: white;
+}
+
+.padding-left-one{
+    padding-left: 15px;
+}
