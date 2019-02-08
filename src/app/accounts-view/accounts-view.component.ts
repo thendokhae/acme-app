@@ -14,6 +14,9 @@ export class AccountsViewComponent implements OnInit {
   accounts$: Account[] = [];
   errorOccured = false;
   selectedAccount: Account = new Account();
+  page = 1;
+  pageSize = 10;
+  collectionSize = 0;
   constructor(private accountService: AccountService, private modalService: NgbModal) {
     this.accountService.getAllAcccount().subscribe(data => {
       if (data) {
@@ -28,6 +31,7 @@ export class AccountsViewComponent implements OnInit {
     }, error => {
       this.errorOccured = true;
     });
+    this.collectionSize = this.accounts$.length;
   }
 
   ngOnInit() {
