@@ -2,7 +2,7 @@
   <span class="navbar-brand mb-0 h1 nav-title-color">Acme Bank</span>
 </nav>
 <div class="row no-margin">
-  <div class="container padding-top-one">
+  <div class="container padding-top-one padding-bottom-one">
     <div class="card">
       <div class="card-title card-title-color">
         <h3 class="padding-left-one">Account List</h3>
@@ -35,16 +35,12 @@
             </tr>
           </tbody>
         </table>
-        <div class="d-flex justify-content-between p-2">
-          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
-          </ngb-pagination>
-        </div>
         <div class="row">
           <div class="col-sm">
             <h3>Balance</h3>
           </div>
           <div class="col-sm">
-            <h3>{{getAccountsTotal() | currency:'ZAR ':'symbol':'4.2-2'}}</h3>
+            <h3>{{getAccountsTotal() | currency:'ZAR '}}</h3>
           </div>
         </div>
       </div>

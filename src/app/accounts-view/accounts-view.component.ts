@@ -14,9 +14,6 @@ export class AccountsViewComponent implements OnInit {
   accounts$: Account[] = [];
   errorOccured = false;
   selectedAccount: Account = new Account();
-  page = 1;
-  pageSize = 10;
-  collectionSize = 0;
   constructor(private accountService: AccountService, private modalService: NgbModal, private config: NgbModalConfig) {
     this.accountService.getAllAcccount().subscribe(data => {
       if (data) {
@@ -31,7 +28,7 @@ export class AccountsViewComponent implements OnInit {
     }, error => {
       this.errorOccured = true;
     });
-    this.collectionSize = this.accounts$.length;
+
     this.config.backdrop = 'static';
   }
 
@@ -57,8 +54,10 @@ export class AccountsViewComponent implements OnInit {
 
   doWithdrawal(account: Account, content) {
     this.selectedAccount = account;
-    this.withdrawalAmount = 0;
-    this.modalService.open(content, { centered: true });
+    this.withdrawalAmount = this.getMaximumWithdrawalAmount();
+    this.confirmWithdrawal();
+    // realised that this was not part of the specifications
+    // this.modalService.open(content, { centered: true });
   }
 
   getAccountsTotal() {
@@ -79,10 +78,8 @@ export class AccountsViewComponent implements OnInit {
 
   confirmWithdrawal() {
     this.selectedAccount.balance -= this.withdrawalAmount;
-    this.modalService.dismissAll();
-    setTimeout(() => {
-      alert('Success');
-    }, 100);
+    alert('Success');
+    // this.modalService.dismissAll();
   }
 
 }
