@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AccountService } from '../account.service';
 import { Account } from '../models/account';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-accounts-view',
@@ -17,7 +17,7 @@ export class AccountsViewComponent implements OnInit {
   page = 1;
   pageSize = 10;
   collectionSize = 0;
-  constructor(private accountService: AccountService, private modalService: NgbModal) {
+  constructor(private accountService: AccountService, private modalService: NgbModal, private config: NgbModalConfig) {
     this.accountService.getAllAcccount().subscribe(data => {
       if (data) {
         data.forEach(element => {
@@ -32,6 +32,7 @@ export class AccountsViewComponent implements OnInit {
       this.errorOccured = true;
     });
     this.collectionSize = this.accounts$.length;
+    this.config.backdrop = 'static';
   }
 
   ngOnInit() {
@@ -79,7 +80,9 @@ export class AccountsViewComponent implements OnInit {
   confirmWithdrawal() {
     this.selectedAccount.balance -= this.withdrawalAmount;
     this.modalService.dismissAll();
-    alert('Success');
+    setTimeout(() => {
+      alert('Success');
+    }, 100);
   }
 
 }
