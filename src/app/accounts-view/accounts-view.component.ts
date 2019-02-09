@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../account.service';
 import { Account } from '../models/account';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -6,8 +6,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-accounts-view',
   templateUrl: './accounts-view.component.html',
-  styleUrls: ['./accounts-view.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./accounts-view.component.css']
 })
 export class AccountsViewComponent implements OnInit {
   withdrawalAmount = 0;
